@@ -5,7 +5,13 @@ public class Mage : Character
 
     public Mage(string name, int level, int health, int mana) : base(name, level, health)
     {
+        Attack = DefaultAttack;
         Mana = mana;
+    }
+
+    private void DefaultAttack()
+    {
+        Console.WriteLine($"{Name} casts Arcane Missile!");
     }
 
     public override void DisplayStats()
@@ -13,8 +19,16 @@ public class Mage : Character
         Console.WriteLine($"Name: {Name}\nLevel: {Level}\nHealth: {Health}\nMana: {Mana}");
     }
 
-    public void CastSpell(string spellName)
+    public void OnLevelUp()
     {
-        Console.WriteLine($"Casting {spellName}");
+        Console.WriteLine($"Mage {Name} has reached Level {Level}! Mana increased.");
+    }
+
+    public void OnHealthChanged(int newHealth)
+    {
+        if (newHealth < 20)
+        {
+            Console.WriteLine($"Mage {Name}'s health is critically low!");
+        }
     }
 }
